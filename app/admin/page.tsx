@@ -1,17 +1,13 @@
+// app/admin/page.tsx
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import RestaurantMenu from "@/components/RestaurantMenu"
 import AdminPanel from "@/components/AdminPanel"
-import { useRouter } from "next/navigation"
 
-export default function Home() {
+export default function AdminPage() {
   const [sections, setSections] = useState([])
   const [items, setItems] = useState({})
   const [isLoading, setIsLoading] = useState(true)
-  const [isAdminMode, setIsAdminMode] = useState(false)
-  const router = useRouter()
 
   useEffect(() => {
     fetchMenuData()
@@ -130,33 +126,15 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-4">
-      <div className="w-full max-w-4xl">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Nuestro Restaurante</h1>
-          <Button onClick={() => setIsAdminMode(!isAdminMode)}>
-            {isAdminMode ? "Ver Menú" : "Modo Admin"}
-          </Button>
-        </div>
-        
-        {isAdminMode ? (
-          <AdminPanel
-            sections={sections}
-            items={items}
-            onAddSection={handleAddSection}
-            onUpdateSection={handleUpdateSection}
-            onDeleteSection={handleDeleteSection}
-            onAddItem={handleAddItem}
-            onUpdateItem={handleUpdateItem}
-            onDeleteItem={handleDeleteItem}
-          />
-        ) : (
-          <RestaurantMenu
-            sections={sections}
-            items={items}
-          />
-        )}
-      </div>
-    </main>
+    <AdminPanel
+      sections={sections}
+      items={items}
+      onAddSection={handleAddSection}
+      onUpdateSection={handleUpdateSection}
+      onDeleteSection={handleDeleteSection}
+      onAddItem={handleAddItem}
+      onUpdateItem={handleUpdateItem}
+      onDeleteItem={handleDeleteItem}
+    />
   )
 }
