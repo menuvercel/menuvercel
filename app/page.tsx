@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import RestaurantMenu from "@/components/RestaurantMenu"
-import AdminPanel from "@/components/AdminPanel"
+import { Button } from "./components/ui/button"
+import RestaurantMenu from "./components/RestaurantMenu"
+import AdminPanel from "./components/AdminPanel"
 import { useRouter } from "next/navigation"
 
 export default function Home() {
