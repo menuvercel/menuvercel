@@ -1,13 +1,31 @@
-// app/admin/page.tsx
 "use client"
 
 import { useState, useEffect } from "react"
+import { Button } from "../components/ui/button"
 import AdminPanel from "../components/AdminPanel"
+import { useRouter } from "next/navigation"
+
+// Definimos las interfaces para nuestras estructuras de datos
+interface Section {
+  id?: number;
+  name: string;
+  image: string;
+}
+
+interface Item {
+  id?: number;
+  section_id: number;
+  name: string;
+  price: string;
+  image: string;
+  description: string;
+}
 
 export default function AdminPage() {
-  const [sections, setSections] = useState([])
-  const [items, setItems] = useState({})
+  const [sections, setSections] = useState<Section[]>([])
+  const [items, setItems] = useState<Record<number, Item[]>>({})
   const [isLoading, setIsLoading] = useState(true)
+  const router = useRouter()
 
   useEffect(() => {
     fetchMenuData()
@@ -26,7 +44,7 @@ export default function AdminPage() {
     setIsLoading(false)
   }
 
-  const handleAddSection = async (newSection) => {
+  const handleAddSection = async (newSection: Section) => {
     try {
       const response = await fetch('/api/menu', {
         method: 'POST',
@@ -41,7 +59,7 @@ export default function AdminPage() {
     }
   }
 
-  const handleUpdateSection = async (updatedSection) => {
+  const handleUpdateSection = async (updatedSection: Section) => {
     try {
       const response = await fetch('/api/menu', {
         method: 'PUT',
@@ -55,7 +73,7 @@ export default function AdminPage() {
     }
   }
 
-  const handleDeleteSection = async (sectionId) => {
+  const handleDeleteSection = async (sectionId: number) => {
     try {
       await fetch('/api/menu', {
         method: 'DELETE',
@@ -71,7 +89,7 @@ export default function AdminPage() {
     }
   }
 
-  const handleAddItem = async (sectionId, newItem) => {
+  const handleAddItem = async (sectionId: number, newItem: Item) => {
     try {
       const response = await fetch('/api/menu', {
         method: 'POST',
@@ -88,7 +106,7 @@ export default function AdminPage() {
     }
   }
 
-  const handleUpdateItem = async (updatedItem) => {
+  const handleUpdateItem = async (updatedItem: Item) => {
     try {
       const response = await fetch('/api/menu', {
         method: 'PUT',
@@ -105,7 +123,7 @@ export default function AdminPage() {
     }
   }
 
-  const handleDeleteItem = async (itemId, sectionId) => {
+  const handleDeleteItem = async (itemId: number, sectionId: number) => {
     try {
       await fetch('/api/menu', {
         method: 'DELETE',
