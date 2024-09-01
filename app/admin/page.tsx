@@ -2,7 +2,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import AdminPanel from "@/components/AdminPanel"
+import AdminPanel from "../components/AdminPanel"
 
 export default function AdminPage() {
   const [sections, setSections] = useState([])
